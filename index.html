@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>扫一扫 · 每日省钱机会扫描（原型）</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stage">
+    <div class="phone" id="phone">
+      <div class="island"></div>
+      <div class="statusbar">
+        <span class="sb-clock">9:41</span>
+        <span class="sb-icons">
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 3.6a10.5 10.5 0 0 1 14 0"/><path d="M3.6 6.2a6.7 6.7 0 0 1 8.8 0"/><circle cx="8" cy="9.3" r="1" fill="currentColor" stroke="none"/></svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.2" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="15" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4c1-.5 1.4-1.1 1.4-2S24 4.5 23 4Z" fill="currentColor" opacity=".5"/></svg>
+        </span>
+      </div>
+      <div class="app">
+        <main class="screen" id="screen"></main>
+        <nav class="tabbar" id="tabbar"></nav>
+      </div>
+      <div class="overlay" id="overlay"></div>
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+
+  <div class="proto-bar" id="protoBar">
+    <button class="pb-arrow" data-dir="-1" aria-label="上一个方案">‹</button>
+    <div class="pb-label"><b id="pbKey">A</b><span id="pbName">仪表盘</span></div>
+    <button class="pb-arrow" data-dir="1" aria-label="下一个方案">›</button>
+    <span class="pb-div"></span>
+    <button class="pb-reset" id="pbReset">重置演示</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
