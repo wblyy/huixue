@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>回血 · 省钱</title>
+  <meta name="description" content="一个跑在你电脑上的助手：查一遍，把能省的钱替你办完。" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="shell">
+
+  <header class="titlebar">
+    <div class="tb-lights"><i></i><i></i><i></i></div>
+    <div class="tb-title">回血 · Agent<span class="tb-live" id="tbLive" hidden></span></div>
+    <div class="tb-right"><span class="tb-dot"></span><span>本地运行 · 数据不出这台电脑</span></div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <svg viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <path d="M13 22S3.6 16.6 3.6 10.4a4.9 4.9 0 0 1 9.4-1.6 4.9 4.9 0 0 1 9.4 1.6C22.4 16.6 13 22 13 22Z" fill="#1F6FF2"/>
+      </svg>
+      <div><b>回血</b><span>替你省，替你办</span></div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab" data-tab="job" type="button">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="6" width="15" height="10.5" rx="1.4"/><path d="M7 6V4.6A1.6 1.6 0 0 1 8.6 3h2.8A1.6 1.6 0 0 1 13 4.6V6"/><path d="M2.5 10.5h15"/></svg>
+        <span class="tb-name">找工作</span><span class="tb-sub">未开放</span>
+      </button>
+      <button class="tab on" data-tab="save" type="button">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.6v14.8"/><path d="M4.6 11.8 10 17.4l5.4-5.6"/></svg>
+        <span class="tb-name">省钱</span><span class="tb-sub">查一遍 · 替你领</span>
+      </button>
+      <button class="tab" data-tab="earn" type="button">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17.4V2.6"/><path d="M4.6 8.2 10 2.6l5.4 5.6"/></svg>
+        <span class="tb-name">赚钱</span><span class="tb-sub">未开放</span>
+      </button>
+    </nav>
+
+    <div class="side-mini">
+      <div class="sm-h">今天</div>
+      <div class="sm-row"><span>查到</span><b id="smFound">—</b></div>
+      <div class="sm-row"><span>办完</span><b id="smDone">0</b></div>
+      <div class="sm-row"><span>需要你</span><b id="smNeed">0</b></div>
+      <div class="sm-row"><span>到账</span><b class="red" id="smMoney">¥0.00</b></div>
+    </div>
+
+    <div class="side-foot">
+      <button class="sf-btn" id="speed" type="button">演示速度 <b id="speedVal">1×</b></button>
+      <div class="sf-note">永久免费 · 不抽成</div>
+    </div>
+  </aside>
+
+  <main class="pane" id="pane">
+
+    <!-- ============ 省钱 ============ -->
+    <div id="paneSave">
+      <div class="wrap">
+
+        <!-- 状态条 -->
+        <div class="statusline">
+          <span class="sl-st" id="stPhase">还没有查过</span>
+          <span class="sl-tip" id="stTip">点下面那个按钮就行，别的不用管。</span>
+          <span class="sl-acct">你的钱合计 <b id="stTotal">¥2,015.80</b></span>
+        </div>
+
+        <!-- 主舞台 -->
+        <section class="stage" id="stage">
+
+          <!-- 圆盘 -->
+          <div class="dial" id="dial">
+            <svg viewBox="0 0 240 240" aria-hidden="true">
+              <circle class="d-track" cx="120" cy="120" r="104"/>
+              <circle class="d-fill" id="dFill" cx="120" cy="120" r="104"
+                stroke-dasharray="653.45" stroke-dashoffset="653.45"/>
+              <circle class="d-sweep" cx="120" cy="120" r="104"
+                stroke-dasharray="70 583.45" stroke-dashoffset="0"/>
+            </svg>
+            <div class="dial-in">
+              <div class="d-num sm" id="dNum">10</div>
+              <div class="d-unit" id="dUnit">家平台待查</div>
+            </div>
+          </div>
+
+          <!-- 头版文案 -->
+          <div class="stage-copy">
+            <div class="kicker" id="kicker">只在过期前，替你跑一趟</div>
+            <h1 id="h1">一键各平台<br>积分兑换</h1>
+            <p class="sub" id="h1sub">移动、联通、电信、支付宝、微信、京东、美团、饿了么、招行、国航——十家平台加起来 9 万多分，放着不用年底清零，我一次换成话费、提现额度、还款金和券。</p>
+            <div class="h1-chips">
+              <span><i></i>十家平台</span>
+              <span><i></i>统一换成话费与提现额度</span>
+              <span><i></i>要验证码的转微信</span>
+            </div>
+          </div>
+
+          <!-- 右侧今日小账 -->
+          <div class="stage-stats">
+            <div class="ss-h">今天这一轮</div>
+            <div class="ss-row"><span>能省的</span><b id="ssFound">—</b></div>
+            <div class="ss-row"><span>已办完</span><b id="ssDone">0</b></div>
+            <div class="ss-row"><span>需要你</span><b id="ssNeed" class="amb">0</b></div>
+            <div class="ss-sep"></div>
+            <div class="ss-big">
+              <span>已经到账</span>
+              <b id="ssMoney">¥0.00</b>
+            </div>
+            <div class="ss-foot" id="ssFoot">还没开始查</div>
+          </div>
+        </section>
+
+        <!-- 大按钮 -->
+        <div class="cta">
+          <button class="big" id="bigBtn" type="button">
+            <span class="bg-main" id="bgMain">一键兑换</span>
+            <span class="bg-sub" id="bgSub">约 5 秒 · 先查各家有多少分</span>
+          </button>
+          <div class="cta-note" id="ctaNote">不会动你的钱。换出来的都是话费、提现额度、还款金和券。</div>
+        </div>
+
+        <!-- 行动前：先让你看见有哪些平台 -->
+        <section class="preview" id="preview">
+          <div class="pv-h">
+            <h2>这十家的积分，你可能都忘了</h2>
+            <span>点「一键兑换」我才知道各有多少分</span>
+          </div>
+          <div class="pv-grid" id="pvGrid"></div>
+          <p class="pv-note"><b>为什么要现在换</b>运营商积分和航司里程年底清零，电商积分按季清零，支付类积分一年一清。平台都不会发短信提醒你。</p>
+        </section>
+
+        <!-- 滚动播报 -->
+        <div class="ticker" id="ticker" hidden>
+          <span class="tk-live"><i></i>正在办</span>
+          <div class="tk-view"><div class="tk-track" id="tkTrack"></div></div>
+        </div>
+
+        <!-- 需要你 -->
+        <section class="handoff" id="handoff" hidden>
+          <div class="ho-h">
+            <b>需要你接手 <i id="hoCount">0</i></b>
+            <span>这几件只能你本人做，剩下的我都在办</span>
+          </div>
+          <div class="ho-list" id="hoList"></div>
+        </section>
+
+        <!-- 清单 -->
+        <section class="listsec" id="listsec" hidden>
+          <div class="lh">
+            <h2 id="lhTitle">查到 8 处可以省</h2>
+            <span id="lhMeta"></span>
+          </div>
+          <div class="rows" id="rows"></div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="fine">
+          <p><b>注 1</b> 积分是你在各平台消费攒下的，本来就有有效期，换出来不涉及本金、余额与银行卡。</p>
+          <p><b>注 2</b> 只做兑换。不碰订单、不改套餐、不退订任何会员。</p>
+          <p><b>注 3</b> 电信、招行、国航的兑换要验证码或会员密码，会转到微信服务号，你回一句就行。用完即删。</p>
+        </footer>
+      </div>
+    </div>
+
+    <!-- 找工作 / 赚钱 -->
+    <div id="paneJob" hidden>
+      <div class="wrap">
+        <section class="soon">
+          <div class="soon-k">找工作</div>
+          <h2>这一栏还没开。</h2>
+          <p>能做的事其实一样：把散在各处的岗位、内推、过期没投的简历翻一遍。但它要你的简历和求职账号，比省钱更近一步。</p>
+          <div class="soon-note"><b>现在没有开着。</b>点过来只是看一眼，它不会自己动。</div>
+        </section>
+      </div>
+    </div>
+
+    <div id="paneEarn" hidden>
+      <div class="wrap">
+        <section class="soon">
+          <div class="soon-k">赚钱</div>
+          <h2>这一栏，暂时不做。</h2>
+          <p>「动动手指月入过万」多半是要你先交钱，或者拿你的号去做别人的事。我不碰。真正能做的零碎活，报酬低到你不会想做。</p>
+          <div class="soon-note"><b>空着也是一种回答。</b></div>
+        </section>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== 微信服务号模拟 ===== -->
+<div class="wx" id="wx" hidden>
+  <div class="wx-mask" data-wx-close></div>
+  <div class="wx-phone">
+    <div class="wx-bar"><span>9:41</span><span>微信服务号 · 回血</span><button class="wx-x" data-wx-close type="button">关闭</button></div>
+    <div class="wx-chat" id="wxChat"></div>
+    <div class="wx-in">
+      <span class="wx-in-ph" id="wxPh">点一个回复…</span>
+      <div class="wx-opts" id="wxOpts"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="tasks.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
